@@ -5,8 +5,7 @@ var gulp = require('gulp'),
     jasmine = require('gulp-jasmine'),
     TerminalReporter = require('jasmine-terminal-reporter'),
     reporters = require('jasmine-reporters'),
-    jshint = require('gulp-jshint'),
-    stylish = require('jshint-stylish');
+    jshint = require('gulp-jshint');
 
 var lintOptions = {
     curly : true,
@@ -42,7 +41,7 @@ gulp.task('unit-test', function() {
 gulp.task('lint', function () {
     return gulp.src(['src/main/*.js'])
         .pipe(jshint(lintOptions))
-        .pipe(jshint.reporter(stylish))
+        .pipe(jshint.reporter('jshint-stylish'))
         .pipe(jshint.reporter('fail'));
 });
 
