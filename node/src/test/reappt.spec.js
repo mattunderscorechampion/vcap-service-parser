@@ -6,10 +6,10 @@ var vcap = require('../main/vcap-parser'),
 
 describe('Reappt plugin', function() {
 
-  it('is named reappt', function() {
-      var parser = new reappt.Parser();
+    it('is named reappt', function() {
+        var parser = new reappt.Parser();
 
-      expect(parser.name).toBe('reappt');
-  });
+        expect(parser.name).toBe('reappt');
+    });
 
 });
