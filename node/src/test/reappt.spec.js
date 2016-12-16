@@ -1,4 +1,6 @@
 
+'use strict';
+
 var vcap = require('../main/vcap-parser'),
     reappt = require('../main/reappt');
 

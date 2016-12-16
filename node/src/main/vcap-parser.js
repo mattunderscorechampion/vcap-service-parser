@@ -1,4 +1,6 @@
 
+'use strict';
+
 function Parser(plugins) {
     this.parse = function parse(services) {
         var result = {};
