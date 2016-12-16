@@ -4,14 +4,8 @@
     "dependencies" : {
     },
     "devDependencies" : {
-      "gulp": "3.9.0",
-      "gulp-jasmine": "2.2.1",
-      "gulp-jsdoc": "0.1.5",
-      "gulp-jshint": "2.0.0",
-      "jshint": "2.8.0",
-      "jshint-stylish": "2.1.0",
-      "mockery": "1.4.0",
-      "saywhen": "1.1.0",
+      "gulp": "3.9.1",
+      "gulp-jasmine": "2.4.2",
       "jasmine-terminal-reporter": "1.0.2",
       "jasmine-reporters": "2.2.0"
     },

@@ -8,7 +8,7 @@ var gulp = require('gulp'),
 
 gulp.task('unit-test', function(done) {
     var reporter = new reporters.JUnitXmlReporter({
-        savePath : "./target/jasmine",
+        savePath : "target/jasmine",
         filePrefix : "JUnit-",
         consolidateAll : false
     });
@@ -17,9 +17,7 @@ gulp.task('unit-test', function(done) {
 
     return gulp.src(['src/test/**/*.js'])
         .pipe(jasmine({
-            reporter : [reporter, terminalReporter],
-            requireStackTrace : true,
-            includeStackTrace : true
+            reporter : [reporter, terminalReporter]
         }));
 });
 
