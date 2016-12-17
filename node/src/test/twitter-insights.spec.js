@@ -2,7 +2,7 @@
 'use strict';
 
 var vcap = require('../main/vcap-parser'),
-    twitterInsights = require('../main/twitter-insights');
+    twitterInsights = require('../main/bluemix/twitter-insights');
 
 describe('Twitter insights plugin', function() {
     var twitterInsightsDetails = {

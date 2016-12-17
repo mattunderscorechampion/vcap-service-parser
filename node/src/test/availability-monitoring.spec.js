@@ -2,7 +2,7 @@
 'use strict';
 
 var vcap = require('../main/vcap-parser'),
-    monitoring = require('../main/availability-monitoring');
+    monitoring = require('../main/bluemix/availability-monitoring');
 
 describe('Monitoring plugin', function() {
     var monitoringDetails = {

@@ -1,27 +1,27 @@
 
 'use strict';
 
-var common = require('./common');
+var common = require('./../common');
 
 function Parser() {
-    this.name = 'monitoring';
+    this.name = 'speech-to-text';
 
     this.parse = function parse(services) {
-        var instance = common.getInstance(services, 'AvailabilityMonitoring');
+        var instance = common.getInstance(services, 'speech_to_text');
         if (!instance) {
             return null;
         }
 
         var details = instance.credentials;
 
-        if (!details || !details.url || !details.id || !details.pass) {
+        if (!details || !details.url || !details.username || !details.password) {
             return null;
         }
 
         var result = common.parse(instance);
         result.url = details.url;
-        result.id = details.id;
-        result.pass = details.pass;
+        result.username = details.username;
+        result.password = details.password;
 
         return result;
     };

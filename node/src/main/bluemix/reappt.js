@@ -1,7 +1,7 @@
 
 'use strict';
 
-var common = require('./common');
+var common = require('./../common');
 
 function Parser() {
     this.name = 'reappt';

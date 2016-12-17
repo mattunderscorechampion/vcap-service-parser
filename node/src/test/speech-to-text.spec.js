@@ -2,7 +2,7 @@
 'use strict';
 
 var vcap = require('../main/vcap-parser'),
-    speechToText = require('../main/speech-to-text');
+    speechToText = require('../main/bluemix/speech-to-text');
 
 describe('Speech to text plugin', function() {
     var speechToTextDetails = {
