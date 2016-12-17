@@ -2,14 +2,20 @@
 'use strict';
 
 function Parser(plugins) {
-    this.parse = function parse(services) {
+    this.parse = function parse(services, serviceNames) {
         if (typeof services === 'string') {
             services = JSON.parse(services);
         }
 
+        var selectedPlugins = plugins;
+        if (typeof serviceNames === 'string') {
+            selectedPlugins = selectedPlugins.filter(function (plugin) {
+                return plugin.name === serviceNames;
+            });
+        }
+
         var result = {};
-        var plugin;
-        plugins.forEach(function(plugin) {
+        selectedPlugins.forEach(function(plugin) {
             result[plugin.name] = plugin.parse(services);
         });
         return result;
