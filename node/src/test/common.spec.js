@@ -20,6 +20,10 @@ describe('Common parser', function() {
         ]
     };
 
+    var services = {
+        'push-reappt' : [details]
+    };
+
     it('extracts the service name', function () {
         var service = common.parse(details);
 
@@ -36,5 +40,11 @@ describe('Common parser', function() {
         var service = common.parse(details);
 
         expect(service.tags[0]).toBe('(S) Cloud');
+    });
+
+    it('can get the instance information', function () {
+        var instance = common.getInstance(services, 'push-reappt');
+
+        expect(instance).toBe(details);
     });
 });

@@ -22,6 +22,26 @@ function parse(service) {
     return result;
 }
 
+function getInstance(services, name) {
+    var service = services[name];
+    if (!service) {
+        return null;
+    }
+
+    if (service.length === 0) {
+        return null;
+    }
+
+    var instance = service[0];
+
+    if (!instance) {
+        return null;
+    }
+
+    return instance;
+}
+
 module.exports = {
-    parse : parse
+    parse : parse,
+    getInstance : getInstance
 };
