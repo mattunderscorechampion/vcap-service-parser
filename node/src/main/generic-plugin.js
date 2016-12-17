@@ -5,6 +5,7 @@ var common = require('./common');
 
 function Parser(selector, name, fields) {
     this.name = name;
+    this.selector = selector;
 
     this.parse = function parse(services) {
         var instance = common.getInstance(services, selector);
