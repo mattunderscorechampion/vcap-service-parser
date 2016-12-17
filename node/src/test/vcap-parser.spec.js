@@ -12,7 +12,7 @@ describe('VCAP service parser', function() {
             'push-reappt' : [{}]
         });
 
-        expect(services.reappt).toBeDefined();
+        expect(services.reappt).toBe(null);
     });
 
 });
