@@ -3,6 +3,10 @@
 
 function Parser(plugins) {
     this.parse = function parse(services) {
+        if (typeof services === 'string') {
+            services = JSON.parse(services);
+        }
+
         var result = {};
         var plugin;
         plugins.forEach(function(plugin) {

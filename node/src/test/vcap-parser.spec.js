@@ -15,4 +15,11 @@ describe('VCAP service parser', function() {
         expect(services.reappt).toBe(null);
     });
 
+    it('can handle a string with the Reappt service', function() {
+        var parser = new vcap.Parser([new reappt.Parser()]);
+        var services = parser.parse('{"push-reappt" : [{}]}');
+
+        expect(services.reappt).toBe(null);
+    });
+
 });
