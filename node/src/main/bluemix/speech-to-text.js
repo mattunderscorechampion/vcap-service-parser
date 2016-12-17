@@ -1,32 +1,12 @@
 
 'use strict';
 
-var common = require('./../common');
-
-function Parser() {
-    this.name = 'speech-to-text';
-
-    this.parse = function parse(services) {
-        var instance = common.getInstance(services, 'speech_to_text');
-        if (!instance) {
-            return null;
-        }
-
-        var details = instance.credentials;
-
-        if (!details || !details.url || !details.username || !details.password) {
-            return null;
-        }
-
-        var result = common.parse(instance);
-        result.url = details.url;
-        result.username = details.username;
-        result.password = details.password;
-
-        return result;
-    };
-}
+var generic = require('./../generic-plugin');
 
 module.exports = {
-    Parser : Parser
+    Parser : generic.Parser.bind(
+        null,
+        'speech_to_text',
+        'speech-to-text',
+        ['url', 'username', 'password'])
 };
