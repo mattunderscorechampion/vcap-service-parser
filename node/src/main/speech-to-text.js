@@ -7,17 +7,7 @@ function Parser() {
     this.name = 'speech-to-text';
 
     this.parse = function parse(services) {
-        var speechToText = services.speech_to_text;
-        if (!speechToText) {
-            return null;
-        }
-
-        if (speechToText.length === 0) {
-            return null;
-        }
-
-        var instance = speechToText[0];
-
+        var instance = common.getInstance(services, 'speech_to_text');
         if (!instance) {
             return null;
         }

@@ -7,17 +7,7 @@ function Parser() {
     this.name = 'twitter-insights';
 
     this.parse = function parse(services) {
-        var twitterInsights = services.twitterinsights;
-        if (!twitterInsights) {
-            return null;
-        }
-
-        if (twitterInsights.length === 0) {
-            return null;
-        }
-
-        var instance = twitterInsights[0];
-
+        var instance = common.getInstance(services, 'twitterinsights');
         if (!instance) {
             return null;
         }

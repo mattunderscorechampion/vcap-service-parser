@@ -7,17 +7,7 @@ function Parser() {
     this.name = 'monitoring';
 
     this.parse = function parse(services) {
-        var monitoring = services.AvailabilityMonitoring;
-        if (!monitoring) {
-            return null;
-        }
-
-        if (monitoring.length === 0) {
-            return null;
-        }
-
-        var instance = monitoring[0];
-
+        var instance = common.getInstance(services, 'AvailabilityMonitoring');
         if (!instance) {
             return null;
         }
