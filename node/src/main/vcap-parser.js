@@ -14,6 +14,10 @@ function Parser(plugins) {
         });
         return result;
     };
+
+    this.resolveAll = function resolveAll() {
+        return this.parse(process.env.VCAP_SERVICES);
+    };
 }
 
 module.exports = {
