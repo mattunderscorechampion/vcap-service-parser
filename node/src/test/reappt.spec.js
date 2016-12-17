@@ -39,6 +39,9 @@ describe('Reappt plugin', function() {
         expect(service.host).toBe('example.us.reappt.io');
         expect(service.principal).toBe('X');
         expect(service.credentials).toBe('Y');
+
+        expect(service.name).toBe('reappt-service');
+        expect(service.plan).toBe('free');
     });
 
 });

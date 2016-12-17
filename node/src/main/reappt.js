@@ -1,6 +1,8 @@
 
 'use strict';
 
+var common = require('./common');
+
 function Parser() {
     this.name = 'reappt';
 
@@ -26,11 +28,12 @@ function Parser() {
             return null;
         }
 
-        return {
-            host : details.host,
-            principal : details.principal,
-            credentials : details.credentials
-        };
+        var result = common.parse(instance);
+        result.host = details.host;
+        result.principal = details.principal;
+        result.credentials = details.credentials;
+
+        return result;
     };
 }
 
