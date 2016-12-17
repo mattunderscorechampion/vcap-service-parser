@@ -10,25 +10,37 @@ function Parser(plugins) {
         });
     };
 
+    var filterPluginsForService = function(serviceNames) {
+        return plugins.filter(function (plugin) {
+            return plugin.name === serviceNames;
+        });
+    };
+    
+    var selectPlugins = function (serviceNames) {
+        if (typeof serviceNames === 'string') {
+            return filterPluginsForService(serviceNames);
+        }
+        else if (typeof serviceNames && serviceNames instanceof Array) {
+            return filterPluginsForServices(serviceNames);
+        }
+        return plugins;
+    };
+
     this.parse = function parse(services, serviceNames) {
+        // Ensure the services are an object
         if (typeof services === 'string') {
             services = JSON.parse(services);
         }
 
-        var selectedPlugins = plugins;
-        if (typeof serviceNames === 'string') {
-            selectedPlugins = selectedPlugins.filter(function (plugin) {
-                return plugin.name === serviceNames;
-            });
-        }
-        else if (typeof serviceNames && serviceNames instanceof Array) {
-            selectedPlugins = filterPluginsForServices(serviceNames);
-        }
+        // Select the plugins to parse with
+        var selectedPlugins = selectPlugins(serviceNames);
 
+        // Use the selected plugins to parse the service
         var result = {};
         selectedPlugins.forEach(function(plugin) {
             result[plugin.name] = plugin.parse(services);
         });
+
         return result;
     };
 
