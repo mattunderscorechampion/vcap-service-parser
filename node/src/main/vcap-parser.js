@@ -2,6 +2,14 @@
 'use strict';
 
 function Parser(plugins) {
+    var filterPluginsForServices = function(serviceNames) {
+        return plugins.filter(function (plugin) {
+            return serviceNames.findIndex(function (serviceName) {
+                    return plugin.name === serviceName;
+                }) !== -1;
+        });
+    };
+
     this.parse = function parse(services, serviceNames) {
         if (typeof services === 'string') {
             services = JSON.parse(services);
@@ -12,6 +20,9 @@ function Parser(plugins) {
             selectedPlugins = selectedPlugins.filter(function (plugin) {
                 return plugin.name === serviceNames;
             });
+        }
+        else if (typeof serviceNames && serviceNames instanceof Array) {
+            selectedPlugins = filterPluginsForServices(serviceNames);
         }
 
         var result = {};
