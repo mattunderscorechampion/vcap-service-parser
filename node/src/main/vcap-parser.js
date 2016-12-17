@@ -24,6 +24,10 @@ function Parser(plugins) {
     this.resolveAll = function resolveAll() {
         return this.parse(process.env.VCAP_SERVICES);
     };
+
+    this.resolve = function resolve(serviceNames) {
+        return this.parse(process.env.VCAP_SERVICES, serviceNames);
+    };
 }
 
 module.exports = {
