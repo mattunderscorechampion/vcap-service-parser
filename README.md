@@ -6,16 +6,7 @@ A node VCAP services parser is provided. It supports parsing the
 VCAP_SERVICES environmental variable and parsing it to a useful
 value.
 
-### Use
-
-```javascript
-var vcapServices = require('vcap-services-parser');
-
-var parser = new vcapServices.Parser(vcapServices.bluemix);
-var services = parser.resolveAll();
-
-console.log(services.cloudant.host);
-```
+[For more information](node/README.md)
 
 ### Build
 
