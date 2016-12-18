@@ -1,6 +1,18 @@
 {
     "name" : "vcap-services-parser",
     "version" : "0.0.1",
+    "license" : "MIT",
+    "author" : {
+        "name" : "Matt Champion",
+        "url" : "https://www.mattunderscore.com/"
+    },
+    "repository" : {
+        "type" : "git",
+        "url" : "https://github.com/mattunderscorechampion/vcap-service-parser.git"
+    },
+
+    "main" : "lib.js",
+    "files" : ["src/main"],
     "dependencies" : {
     },
     "devDependencies" : {
