@@ -1,10 +1,4 @@
-# VCAP Services Parser
-
-## Node
-
-A node VCAP services parser is provided. It supports parsing the
-VCAP_SERVICES environmental variable and parsing it to a useful
-value.
+# Node VCAP Services Parser
 
 ### Use
 
