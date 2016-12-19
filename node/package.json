@@ -8,7 +8,7 @@
     },
     "repository" : {
         "type" : "git",
-        "url" : "https://github.com/mattunderscorechampion/vcap-service-parser.git"
+        "url" : "https://github.com/mattunderscorechampion/vcap-services-parser.git"
     },
 
     "main" : "src/main/lib.js",
