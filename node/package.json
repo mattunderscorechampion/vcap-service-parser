@@ -10,6 +10,9 @@
         "type" : "git",
         "url" : "https://github.com/mattunderscorechampion/vcap-services-parser.git"
     },
+    "bugs" : {
+        "url" : "https://github.com/mattunderscorechampion/vcap-services-parser/issues"
+    },
 
     "main" : "src/main/lib.js",
     "files" : ["src/main"],
