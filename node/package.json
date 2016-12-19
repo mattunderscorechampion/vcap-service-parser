@@ -14,6 +14,7 @@
     "bugs" : {
         "url" : "https://github.com/mattunderscorechampion/vcap-services-parser/issues"
     },
+    "homepage": "https://github.com/mattunderscorechampion/vcap-services-parser/tree/master/node#readme",
 
     "main" : "src/main/lib.js",
     "files" : ["src/main"],
