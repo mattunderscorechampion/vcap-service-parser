@@ -1,5 +1,6 @@
 {
     "name" : "vcap-services-parser",
+    "description": "Parser for `VCAP_SERVICES` environmental variable.",
     "version" : "0.2.0",
     "license" : "MIT",
     "author" : {
