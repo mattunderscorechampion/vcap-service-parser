@@ -1,6 +1,8 @@
 
 # Node VCAP Services Parser
 
+[![npm version](https://badge.fury.io/js/vcap-services-parser.svg)](https://badge.fury.io/js/vcap-services-parser)
+
 Parser for `VCAP_SERVICES` environmental variable.
 
 ## Usage
