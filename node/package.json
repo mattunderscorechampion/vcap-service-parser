@@ -20,13 +20,13 @@
     "dependencies" : {
     },
     "devDependencies" : {
-      "gulp": "3.9.1",
-      "gulp-jasmine": "2.4.2",
-      "jasmine-terminal-reporter": "1.0.2",
-      "jasmine-reporters": "2.2.0",
-      "gulp-jshint": "2.0.4",
-      "jshint": "2.9.4",
-      "jshint-stylish": "2.2.1"
+        "gulp": "3.9.1",
+        "gulp-jasmine": "2.4.2",
+        "jasmine-terminal-reporter": "1.0.2",
+        "jasmine-reporters": "2.2.0",
+        "gulp-jshint": "2.0.4",
+        "jshint": "2.9.4",
+        "jshint-stylish": "2.2.1"
     },
 
     "scripts" : {
