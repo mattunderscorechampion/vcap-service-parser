@@ -4,51 +4,48 @@
 var unknown = require('./unknown-service-plugin');
 
 function Parser(plugins) {
-    function filterPluginsForServices(availablePlugins, serviceNames) {
-        return availablePlugins.filter(function (plugin) {
-            return serviceNames.findIndex(function (serviceName) {
-                    return plugin.name === serviceName;
-                }) !== -1;
-        });
+    var pluginsBySelector = {};
+    var pluginsByName = {};
+    plugins.forEach(function (plugin) {
+        pluginsBySelector[plugin.selector] = plugin;
+        pluginsByName[plugin.name] = plugin;
+    });
+
+    function pluginForName(serviceName) {
+        var selectedPlugin = pluginsByName[serviceName];
+
+        if (selectedPlugin) {
+            return selectedPlugin;
+        }
+        else {
+            return new unknown.Parser(serviceName);
+        }
     }
 
-    function selectPlugins(serviceNames, unknownServices) {
-        var availablePlugins = plugins.concat(unknownServices);
-
+    function selectPlugins(serviceNames) {
         if (typeof serviceNames === 'string') {
-            return filterPluginsForServices(availablePlugins, [serviceNames]);
+            return [serviceNames].map(pluginForName);
         }
         else if (typeof serviceNames && serviceNames instanceof Array) {
-            return filterPluginsForServices(availablePlugins, serviceNames);
+            return serviceNames.map(pluginForName);
         }
-        return availablePlugins;
+        throw new Error('Failed to resolve service names');
     }
 
     function availableServices(services) {
         var available = [];
         for (var property in services) {
             if (services.hasOwnProperty(property)) {
-                available.push(property);
+                var plugin = pluginsBySelector[property];
+                if (plugin) {
+                    available.push(plugin.name);
+                }
+                else {
+                    available.push(property);
+                }
             }
         }
         return available;
-    }
-
-    function isKnownService(serviceName) {
-        return plugins.findIndex(function (plugin) {
-            return plugin.selector === serviceName;
-        }) === -1;
-    }
-
-    function createPluginsForUnknownServices(services) {
-        var unknownServicePlugins = [];
-        availableServices(services).forEach(function(service) {
-            if (isKnownService(service)) {
-                unknownServicePlugins.push(new unknown.Parser(service));
-            }
-        });
-
-        return unknownServicePlugins;
     }
 
     this.parse = function parse(services, serviceNames) {
@@ -57,9 +54,12 @@ function Parser(plugins) {
             services = JSON.parse(services);
         }
 
+        if (!serviceNames) {
+            serviceNames = availableServices(services);
+        }
+
         // Select the plugins to parse with
-        var unknownServices = createPluginsForUnknownServices(services);
-        var selectedPlugins = selectPlugins(serviceNames, unknownServices);
+        var selectedPlugins = selectPlugins(serviceNames);
 
         // Use the selected plugins to parse the service
         var result = {};
