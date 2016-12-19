@@ -85,4 +85,15 @@ describe('VCAP service parser', function() {
         expect(services['push-reappt'].principal).toBe("principal");
         expect(services['push-reappt'].credentials).toBe("credentials");
     });
+
+    it('can resolve specific unknown services from environmental variables', function() {
+        process.env.VCAP_SERVICES = '{"push-reappt":[{"credentials":{"host":"host","principal":"principal","credentials":"credentials"}}]}';
+
+        var parser = new vcap.Parser([]);
+        var services = parser.resolve('push-reappt');
+
+        expect(services['push-reappt'].host).toBe("host");
+        expect(services['push-reappt'].principal).toBe("principal");
+        expect(services['push-reappt'].credentials).toBe("credentials");
+    });
 });

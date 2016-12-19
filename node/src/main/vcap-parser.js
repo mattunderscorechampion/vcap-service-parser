@@ -4,28 +4,28 @@
 var unknown = require('./unknown-service-plugin');
 
 function Parser(plugins) {
-    function filterPluginsForServices(serviceNames) {
-        return plugins.filter(function (plugin) {
+    function filterPluginsForServices(serviceNames, unknownServices) {
+        return plugins.concat(unknownServices).filter(function (plugin) {
             return serviceNames.findIndex(function (serviceName) {
                     return plugin.name === serviceName;
                 }) !== -1;
         });
     }
 
-    function filterPluginsForService(serviceNames) {
-        return plugins.filter(function (plugin) {
+    function filterPluginsForService(serviceNames, unknownServices) {
+        return plugins.concat(unknownServices).filter(function (plugin) {
             return plugin.name === serviceNames;
         });
     }
 
-    function selectPlugins(serviceNames) {
+    function selectPlugins(serviceNames, unknownServices) {
         if (typeof serviceNames === 'string') {
-            return filterPluginsForService(serviceNames);
+            return filterPluginsForService(serviceNames, unknownServices);
         }
         else if (typeof serviceNames && serviceNames instanceof Array) {
-            return filterPluginsForServices(serviceNames);
+            return filterPluginsForServices(serviceNames, unknownServices);
         }
-        return plugins;
+        return plugins.concat(unknownServices);
     }
 
     function availableServices(services) {
@@ -51,17 +51,15 @@ function Parser(plugins) {
         return unknownServicePlugins;
     }
 
-    this.parse = function parse(services, serviceNames, addUnknown) {
+    this.parse = function parse(services, serviceNames) {
         // Ensure the services are an object
         if (typeof services === 'string') {
             services = JSON.parse(services);
         }
 
         // Select the plugins to parse with
-        var selectedPlugins = selectPlugins(serviceNames);
-        if (addUnknown) {
-            selectedPlugins = selectedPlugins.concat(createPluginsForUnknownServices(services));
-        }
+        var unknownServices = createPluginsForUnknownServices(services);
+        var selectedPlugins = selectPlugins(serviceNames, unknownServices);
 
         // Use the selected plugins to parse the service
         var result = {};
@@ -73,11 +71,11 @@ function Parser(plugins) {
     };
 
     this.resolveAll = function resolveAll() {
-        return this.parse(process.env.VCAP_SERVICES, null, true);
+        return this.parse(process.env.VCAP_SERVICES, null);
     };
 
     this.resolve = function resolve(serviceNames) {
-        return this.parse(process.env.VCAP_SERVICES, serviceNames, false);
+        return this.parse(process.env.VCAP_SERVICES, serviceNames);
     };
 }
 
