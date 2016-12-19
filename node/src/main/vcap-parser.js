@@ -4,28 +4,24 @@
 var unknown = require('./unknown-service-plugin');
 
 function Parser(plugins) {
-    function filterPluginsForServices(serviceNames, unknownServices) {
-        return plugins.concat(unknownServices).filter(function (plugin) {
+    function filterPluginsForServices(availablePlugins, serviceNames) {
+        return availablePlugins.filter(function (plugin) {
             return serviceNames.findIndex(function (serviceName) {
                     return plugin.name === serviceName;
                 }) !== -1;
         });
     }
 
-    function filterPluginsForService(serviceNames, unknownServices) {
-        return plugins.concat(unknownServices).filter(function (plugin) {
-            return plugin.name === serviceNames;
-        });
-    }
-
     function selectPlugins(serviceNames, unknownServices) {
+        var availablePlugins = plugins.concat(unknownServices);
+
         if (typeof serviceNames === 'string') {
-            return filterPluginsForService(serviceNames, unknownServices);
+            return filterPluginsForServices(availablePlugins, [serviceNames]);
         }
         else if (typeof serviceNames && serviceNames instanceof Array) {
-            return filterPluginsForServices(serviceNames, unknownServices);
+            return filterPluginsForServices(availablePlugins, serviceNames);
         }
-        return plugins.concat(unknownServices);
+        return availablePlugins;
     }
 
     function availableServices(services) {
@@ -38,12 +34,16 @@ function Parser(plugins) {
         return available;
     }
 
+    function isKnownService(serviceName) {
+        return plugins.findIndex(function (plugin) {
+            return plugin.selector === serviceName;
+        }) === -1;
+    }
+
     function createPluginsForUnknownServices(services) {
         var unknownServicePlugins = [];
         availableServices(services).forEach(function(service) {
-            if (plugins.findIndex(function (plugin) {
-                return plugin.selector === service;
-            }) === -1) {
+            if (isKnownService(service)) {
                 unknownServicePlugins.push(new unknown.Parser(service));
             }
         });
