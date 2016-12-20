@@ -3,7 +3,9 @@
 
 [![npm version](https://badge.fury.io/js/vcap-services-parser.svg)](https://badge.fury.io/js/vcap-services-parser)
 
-Parser for `VCAP_SERVICES` environmental variable.
+A parser for `VCAP_SERVICES` environmental variable used
+by CloudFoundry applications. It can return all of the
+services bound to an application or a subset of them.
 
 ## Usage
 
