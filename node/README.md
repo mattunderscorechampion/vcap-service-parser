@@ -21,17 +21,23 @@ var services = parser.resolveAll();
 console.log(services.cloudant.host);
 
 // Resolve a specific service
-var selectedServices = parser.resolve('speech-to-text');
+var speechToText = parser.resolve('speech-to-text');
+console.log(speechToText.url);
+
+// Resolve several services
+var selectedServices = parser.resolve(['speech-to-text', 'cloudant']);
 console.log(selectedServices['speech-to-text'].url);
+console.log(selectedServices.cloudant.host);
 ```
 
 ## Services
 
-When services are resolved an object is returned containing
-a map from the service name to a description of the
-service. Included in all service descriptions are the
-instance `name`, `plan` and service `tags`. Different services
-can have different properties.
+When multiple services are resolved an object is returned
+that maps from the service name to a description of the
+service. When a single service is resolved a description
+of the service is returned. Included in all service
+descriptions are the instance `name`, `plan` and service
+`tags`. Different services can have different properties.
 
 ### Supported services
 
@@ -76,4 +82,5 @@ The description includes the properties `host`, `port`,
 ### Unsupported services
 
 Unsupported services copy all entries from the
-`credentials` property onto the service description.
+`credentials` property onto the service description. The
+service name is taken from the `VCAP_SERVICES` value.

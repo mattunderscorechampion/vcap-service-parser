@@ -49,6 +49,10 @@ function Parser(plugins) {
     }
 
     function processServices(selectedPlugins, services) {
+        if (selectedPlugins.length === 1) {
+            return selectedPlugins[0].parse(services);
+        }
+
         var result = {};
         selectedPlugins.forEach(function(plugin) {
             result[plugin.name] = plugin.parse(services);
