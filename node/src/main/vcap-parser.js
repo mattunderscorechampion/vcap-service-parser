@@ -48,12 +48,22 @@ function Parser(plugins) {
         return available;
     }
 
+    function processServices(selectedPlugins, services) {
+        var result = {};
+        selectedPlugins.forEach(function(plugin) {
+            result[plugin.name] = plugin.parse(services);
+        });
+
+        return result;
+    }
+
     this.parse = function parse(services, serviceNames) {
         // Ensure the services are an object
         if (typeof services === 'string') {
             services = JSON.parse(services);
         }
 
+        // Find the names of the services to parse
         if (!serviceNames) {
             serviceNames = availableServices(services);
         }
@@ -62,12 +72,7 @@ function Parser(plugins) {
         var selectedPlugins = selectPlugins(serviceNames);
 
         // Use the selected plugins to parse the service
-        var result = {};
-        selectedPlugins.forEach(function(plugin) {
-            result[plugin.name] = plugin.parse(services);
-        });
-
-        return result;
+        return processServices(selectedPlugins, services);
     };
 
     this.resolveAll = function resolveAll() {
